@@ -20,13 +20,15 @@ class App extends Component {
   componentDidMount() {
     const { google } = window
     const { zoom, center, locations } = this.state
+
     // Create a new map and
     let map = new google.maps.Map(document.getElementById('map'), {
       center,
       zoom,
     });
+
     // Crate a marker for each item of locations array
-    for (let item of locations) {
+    locations.map(item => {
       let position = item.location
       let title = item.title
       // Marker constructor
@@ -43,7 +45,7 @@ class App extends Component {
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
-    }
+    })
   }
 
   render() {
