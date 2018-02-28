@@ -3,11 +3,11 @@ import './App.css';
 
 class App extends Component {
   state = {
-    // Info required to create a map
+    // Infos required to create a map
     zoom: 12,
     center: {lat: 40.7347062, lng: -73.9895759},
-    // Create locations manually instead of a database.
-    // (Copied from Udacity Google Maps API course)
+    // Create locations manually instead of a database. Copied from:
+    // https://github.com/udacity/ud864/blob/master/Project_Code_3_WindowShoppingPart1.html
     locations: [
       {title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
       {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
@@ -20,13 +20,11 @@ class App extends Component {
   componentDidMount() {
     const { google } = window
     const { zoom, center, locations } = this.state
-
     // Create a new map and
     let map = new google.maps.Map(document.getElementById('map'), {
       center,
       zoom,
     });
-
     // Crate a marker for each item of locations array
     for (let item of locations) {
       let position = item.location
@@ -37,6 +35,14 @@ class App extends Component {
         title,
         map
       })
+      // Infowindow constructor
+      let infowindow = new google.maps.InfoWindow({
+        content: title
+      });
+      // Open infowindow when marker is clicked
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
     }
   }
 
