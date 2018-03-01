@@ -18,6 +18,7 @@ class App extends Component {
       {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
     ],
     markers: [],
+    query: "",
   }
 
   componentDidMount() {
@@ -72,6 +73,9 @@ class App extends Component {
     // Get back the marker of the clicked one if it is removed before
     this.state.markers[e].setMap(this.state.map)
   }
+  updateQuery = (query) => {
+    this.setState({ query: query.trim() })
+  }
 
   render() {
     return (
@@ -79,6 +83,12 @@ class App extends Component {
         <div id='info'>
           <input onClick={this.showListings} id="show-listings" type="button" value="Show Listings"/>
           <input onClick={this.hideListings} id="hide-listings" type="button" value="Hide Listings"/>
+          <input
+            type='text'
+            placeholder='Search'
+            value={this.state.query}
+            onChange={(event) => this.updateQuery(event.target.value)}
+          />
           <div id='list'>{this.state.markers.map((marker, index)=>
             <div key={index} onClick={() => this.showOnly(index)}>
             <br/>{marker.title}<hr/>
