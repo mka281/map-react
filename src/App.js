@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
+import './App.css'
 
 class App extends Component {
   state = {
@@ -78,10 +80,23 @@ class App extends Component {
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
   }
+  clearQuery = () => {
+    this.setState({ query: "" })
+  }
 
   render() {
     const { showListings, hideListings, updateQuery, showOnly } = this
-    const { query, markers } = this.state
+    const { query, markers, locations } = this.state
+
+    let showingLocations;
+    if (query) {
+      const match = new RegExp(escapeRegExp(query), 'i')
+      showingLocations = locations.filter(location => match.test(location.title))
+    } else {
+      showingLocations = locations
+    }
+    showingLocations.sort(sortBy('name'))
+
     return (
       <div id='app'>
         <div id='info'>
@@ -93,7 +108,15 @@ class App extends Component {
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
           />
-          <div id='list'>{markers.map((marker, index)=>
+          {showingLocations.length !== markers.length &&
+            <div>
+              <span>Now showing {showingLocations.length} of {markers.length} total</span>
+              <button onClick={this.clearQuery}>
+                Show all
+              </button>
+            </div>
+          }
+          <div id='list'>{showingLocations.map((marker, index)=>
             <div key={index} onClick={() => showOnly(index)}>
             <br/>{marker.title}<hr/>
             </div>
