@@ -63,6 +63,15 @@ class App extends Component {
       this.setState(marker.setMap(this.state.map))
     )
   }
+  showOnly = (e) => {
+    console.log(e)
+    // Remove markers except the clicked one
+    this.state.markers.filter((marker, index) => index !== e).map(marker=>
+      marker.setMap(null)
+    )
+    // Get back the marker of the clicked one if it is removed before
+    this.state.markers[e].setMap(this.state.map)
+  }
 
   render() {
     return (
@@ -70,6 +79,12 @@ class App extends Component {
         <div id='info'>
           <input onClick={this.showListings} id="show-listings" type="button" value="Show Listings"/>
           <input onClick={this.hideListings} id="hide-listings" type="button" value="Hide Listings"/>
+          <div id='list'>{this.state.markers.map((marker, index)=>
+            <div key={index} onClick={() => this.showOnly(index)}>
+            <br/>{marker.title}<hr/>
+            </div>
+          )}
+          </div>
         </div>
         <div id='map' />
       </div>
