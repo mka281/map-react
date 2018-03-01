@@ -55,42 +55,46 @@ class App extends Component {
     })
   }
   hideListings = () => {
-    this.state.markers.map(marker =>
+    const { markers } = this.state
+    markers.map(marker =>
       this.setState(marker.setMap(null))
     )
   }
   showListings = () => {
-    this.state.markers.map(marker =>
-      this.setState(marker.setMap(this.state.map))
+    const { markers, map } = this.state
+    markers.map(marker =>
+      this.setState(marker.setMap(map))
     )
   }
   showOnly = (e) => {
-    console.log(e)
+    const { markers, map } = this.state
     // Remove markers except the clicked one
-    this.state.markers.filter((marker, index) => index !== e).map(marker=>
+    markers.filter((marker, index) => index !== e).map(marker=>
       marker.setMap(null)
     )
     // Get back the marker of the clicked one if it is removed before
-    this.state.markers[e].setMap(this.state.map)
+    markers[e].setMap(map)
   }
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
   }
 
   render() {
+    const { showListings, hideListings, updateQuery, showOnly } = this
+    const { query, markers } = this.state
     return (
       <div id='app'>
         <div id='info'>
-          <input onClick={this.showListings} id="show-listings" type="button" value="Show Listings"/>
-          <input onClick={this.hideListings} id="hide-listings" type="button" value="Hide Listings"/>
+          <input onClick={showListings} id="show-listings" type="button" value="Show Listings"/>
+          <input onClick={hideListings} id="hide-listings" type="button" value="Hide Listings"/>
           <input
             type='text'
             placeholder='Search'
-            value={this.state.query}
-            onChange={(event) => this.updateQuery(event.target.value)}
+            value={query}
+            onChange={(event) => updateQuery(event.target.value)}
           />
-          <div id='list'>{this.state.markers.map((marker, index)=>
-            <div key={index} onClick={() => this.showOnly(index)}>
+          <div id='list'>{markers.map((marker, index)=>
+            <div key={index} onClick={() => showOnly(index)}>
             <br/>{marker.title}<hr/>
             </div>
           )}
