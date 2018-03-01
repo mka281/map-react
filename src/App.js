@@ -3,6 +3,7 @@ import './App.css';
 
 class App extends Component {
   state = {
+    map: {},
     // Infos required to create a map
     zoom: 12,
     center: {lat: 40.7347062, lng: -73.9895759},
@@ -16,16 +17,19 @@ class App extends Component {
       {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
       {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
     ],
+    markers: [],
   }
+
   componentDidMount() {
     const { google } = window
-    const { zoom, center, locations } = this.state
+    const { zoom, center, locations, markers } = this.state
 
-    // Create a new map and
+    // Create map
     let map = new google.maps.Map(document.getElementById('map'), {
       center,
       zoom,
     });
+    this.setState({ map })
 
     // Crate a marker for each item of locations array
     locations.map(item => {
@@ -37,6 +41,8 @@ class App extends Component {
         title,
         map
       })
+      markers.push(marker)
+      this.setState({ markers })
       // Infowindow constructor
       let infowindow = new google.maps.InfoWindow({
         content: title
@@ -47,7 +53,6 @@ class App extends Component {
       });
     })
   }
-
   render() {
     return (
       <div id='app'>
