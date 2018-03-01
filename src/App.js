@@ -53,9 +53,24 @@ class App extends Component {
       });
     })
   }
+  hideListings = () => {
+    this.state.markers.map(marker =>
+      this.setState(marker.setMap(null))
+    )
+  }
+  showListings = () => {
+    this.state.markers.map(marker =>
+      this.setState(marker.setMap(this.state.map))
+    )
+  }
+
   render() {
     return (
       <div id='app'>
+        <div id='info'>
+          <input onClick={this.showListings} id="show-listings" type="button" value="Show Listings"/>
+          <input onClick={this.hideListings} id="hide-listings" type="button" value="Hide Listings"/>
+        </div>
         <div id='map' />
       </div>
     );

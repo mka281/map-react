@@ -1,4 +1,11 @@
+#app {
+  display: flex;
+  flex-wrap: nowrap;
+}
 #map {
-  width: 100%;
+  width: 80%;
   height: 500px;
+}
+#info {
+  width: 20%;
 }
