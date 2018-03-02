@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+import Info from './Info'
+import Map from './Map'
 import './App.css'
 
 class App extends Component {
@@ -85,50 +85,23 @@ class App extends Component {
   }
 
   render() {
-    const { showListings, hideListings, updateQuery, showOnly } = this
-    const { map, query, markers, locations } = this.state
-
-    let showingLocations;
-    if (query) {
-      // Store locations matched with query in showingLocations
-      const match = new RegExp(escapeRegExp(query), 'i')
-      showingLocations = markers.filter(marker => match.test(marker.title))
-      // Show only checked locations' markers on map
-      markers.map(marker => marker.setMap(null))
-      showingLocations.map(location => location.setMap(map))
-    } else {
-      // If there is no match make showLocations include all markers
-      showingLocations = markers
-    }
-    showingLocations.sort(sortBy('name'))
-
+    const { map, zoom, center, markers, query } = this.state
+    const { hideListings, showListings, showOnly, updateQuery, clearQuery } = this
     return (
       <div id='app'>
-        <div id='info'>
-          <input onClick={showListings} id="show-listings" type="button" value="Show Listings"/>
-          <input onClick={hideListings} id="hide-listings" type="button" value="Hide Listings"/>
-          <input
-            type='text'
-            placeholder='Search'
-            value={query}
-            onChange={(event) => updateQuery(event.target.value)}
-          />
-          {showingLocations.length !== markers.length &&
-            <div>
-              <span>Now showing {showingLocations.length} of {markers.length} total</span>
-              <button onClick={this.clearQuery}>
-                Show all
-              </button>
-            </div>
-          }
-          <div id='list'>{showingLocations.map((marker, index)=>
-            <div key={index} onClick={() => showOnly(index)}>
-            <br/>{marker.title}<hr/>
-            </div>
-          )}
-          </div>
-        </div>
-        <div id='map' />
+        <Info
+          map={map}
+          zoom={zoom}
+          center={center}
+          markers={markers}
+          query={query}
+          hideListings={hideListings}
+          showListings={showListings}
+          showOnly={showOnly}
+          updateQuery={updateQuery}
+          clearQuery={clearQuery}
+        />
+        <Map />
       </div>
     );
   }
