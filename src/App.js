@@ -86,14 +86,19 @@ class App extends Component {
 
   render() {
     const { showListings, hideListings, updateQuery, showOnly } = this
-    const { query, markers, locations } = this.state
+    const { map, query, markers, locations } = this.state
 
     let showingLocations;
     if (query) {
+      // Store locations matched with query in showingLocations
       const match = new RegExp(escapeRegExp(query), 'i')
-      showingLocations = locations.filter(location => match.test(location.title))
+      showingLocations = markers.filter(marker => match.test(marker.title))
+      // Show only checked locations' markers on map
+      markers.map(marker => marker.setMap(null))
+      showingLocations.map(location => location.setMap(map))
     } else {
-      showingLocations = locations
+      // If there is no match make showLocations include all markers
+      showingLocations = markers
     }
     showingLocations.sort(sortBy('name'))
 
