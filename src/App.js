@@ -13,12 +13,31 @@ class App extends Component {
     // Create locations manually instead of a database. Copied from:
     // https://github.com/udacity/ud864/blob/master/Project_Code_3_WindowShoppingPart1.html
     locations: [
-      {title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
-      {title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-      {title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-      {title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-      {title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-      {title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
+      {
+        title: 'Park Ave Penthouse',
+        location: {lat: 40.7713024, lng: -73.9632393},
+        foursquareId: "4b83992ef964a520dd0a31e3"
+      },{
+        title: 'Chelsea Loft',
+        location: {lat: 40.7444883, lng: -73.9949465},
+        foursquareId: "4b824a4bf964a5202dcf30e3"
+      },{
+        title: 'Union Square Open Floor Plan',
+        location: {lat: 40.7347062, lng: -73.9895759},
+        foursquareId: "4bc8088f15a7ef3b6b857ada"
+      },{
+        title: 'East Village Hip Studio',
+        location: {lat: 40.7281777, lng: -73.984377},
+        foursquareId: "4bc8088f15a7ef3b6b857ada"
+      },{
+        title: 'TriBeCa Artsy Bachelor Pad',
+        location: {lat: 40.7195264, lng: -74.0089934},
+        foursquareId: "4bc8088f15a7ef3b6b857ada"
+      },{
+        title: 'Chinatown Homey Space',
+        location: {lat: 40.7180628, lng: -73.9961237},
+        foursquareId: "52303b6111d23260984e7830"
+      }
     ],
     markers: [],
     query: "",
@@ -47,16 +66,52 @@ class App extends Component {
       })
       markers.push(marker)
       this.setState({ markers })
+
       // Infowindow constructor
       let infowindow = new google.maps.InfoWindow({
-        content: title
+        maxWidth: 250
       });
       // Open infowindow when marker is clicked
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
+
+      // FOURSQUARE API REQUEST
+      const placeId = item.foursquareId
+      const fsqApiUrl = `https://api.foursquare.com/v2/venues/${placeId}?&oauth_token=FEBDSPSSOAXMNNWDMD1ZUCSYEDBYLRWQ31APQF11OB2OB1UN&v=20180303`
+      fetch(fsqApiUrl)
+      .then(res => { return res.json() })
+      .then(data => { return data.response.venue })
+      .then(venue => {
+        console.log(venue)
+        const { bestPhoto, description, rating, ratingColor,
+                isOpen, officialUrl, fsqUrl } = venue
+        const prefix = bestPhoto.prefix
+        const suffix = bestPhoto.suffix
+        const size = "250x200"
+        const photoURL = prefix + size + suffix;
+        const info = { photoURL, description, rating, ratingColor, isOpen, officialUrl, fsqUrl }
+        return info
+      })
+      .then(info => {
+        console.log(info.ratingColor)
+        infowindow.setContent(
+          `<div>
+            <h3>${title}</h3>
+            <p>${info.description}</p>
+            <img src="${info.photoURL}"/>
+            <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
+            <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
+            <a href="${info.officialUrl}">Official Website</a>
+            <a href="${info.fsqUrl}">View on Foursquare</a>
+          </div>`
+        )
+      })
+      .catch(err => { console.log(err) })
+
     })
   }
+
   hideListings = () => {
     const { markers } = this.state
     markers.map(marker =>
