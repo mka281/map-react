@@ -26,14 +26,17 @@ class Info extends Component {
 
     return (
       <div id='info'>
-        <input onClick={showListings} id="show-listings" type="button" value="Show Listings"/>
-        <input onClick={hideListings} id="hide-listings" type="button" value="Hide Listings"/>
-        <input id="search"
-          type='text'
-          placeholder='Search'
-          value={query}
-          onChange={(event) => updateQuery(event.target.value)}
-        />
+        <button onClick={showListings} id="show-listings" type="button">Show All</button>
+        <button onClick={hideListings} id="hide-listings" type="button">Hide All</button>
+        <div id="search-container">
+          <span id="search-icon">
+            <i className="fa fa-search"></i>
+          </span>
+          <input id="search" type='text' placeholder='Search'
+            value={query}
+            onChange={(event) => updateQuery(event.target.value)}
+          />
+        </div>
         {showingLocations.length !== markers.length &&
           <div>
             <span>Now showing {showingLocations.length} of {markers.length} total</span>
@@ -43,8 +46,8 @@ class Info extends Component {
           </div>
         }
         <div id='list'>{showingLocations.map((marker, index)=>
-          <div key={index} onClick={() => showOnly(index)}>
-          <br/>{marker.title}<hr/>
+          <div id='list-item' key={index} onClick={() => showOnly(index)}>
+            {marker.title}
           </div>
         )}
         </div>
