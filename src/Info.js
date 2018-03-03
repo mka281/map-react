@@ -28,7 +28,7 @@ class Info extends Component {
       <div id='info'>
         <input onClick={showListings} id="show-listings" type="button" value="Show Listings"/>
         <input onClick={hideListings} id="hide-listings" type="button" value="Hide Listings"/>
-        <input
+        <input id="search"
           type='text'
           placeholder='Search'
           value={query}

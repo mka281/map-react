@@ -1,11 +1,52 @@
+html, body {
+  height: 100%;
+  
+}
+#root {
+  height: 100%;
+}
+
 #app {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  height: 100%;
 }
 #map {
-  width: 80%;
-  height: 500px;
+  width: 73%;
+  height: calc(100% - 50px);
 }
 #info {
-  width: 20%;
+  width: 27%;
+  height: calc(100% - 50px);
+}
+
+/* Nav */
+nav {
+  width: 100%;
+  height: 50px;
+  background-color: #1C262F;
+}
+#nav-icon {
+  width: 28px;
+  height: 20px;
+  margin: 15px;
+  transform: rotate(0deg);
+  cursor: pointer;
+}
+#nav-icon span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #02B3E4;
+  border-radius: 2px;
+}
+#nav-icon span:nth-child(1) {
+  top: 0px;
+}
+#nav-icon span:nth-child(2) {
+  top: 8px;
+}
+#nav-icon span:nth-child(3) {
+  top: 16px;
 }

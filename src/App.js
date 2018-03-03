@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Nav from './Nav'
 import Info from './Info'
 import Map from './Map'
 import './App.css'
@@ -89,6 +90,7 @@ class App extends Component {
     const { hideListings, showListings, showOnly, updateQuery, clearQuery } = this
     return (
       <div id='app'>
+        <Nav />
         <Info
           map={map}
           zoom={zoom}
