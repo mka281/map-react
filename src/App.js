@@ -141,7 +141,9 @@ class App extends Component {
     const mapDiv = document.getElementById('map')
     if (infoDiv.style.display === "none") {
         infoDiv.style.display = "block"
-        mapDiv.style.width = "73%"
+        if (window.screen.width > 800) {
+          mapDiv.style.width = "73%"
+        }
     } else {
         infoDiv.style.display = "none"
         mapDiv.style.width = "100%"
