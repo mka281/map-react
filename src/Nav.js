@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 
 class Map extends Component {
   render() {
+    const { toggleInfoDiv } = this.props
     return (
       <nav>
-        <div id="nav-icon">
+        <div id="nav-icon"
+          onClick={toggleInfoDiv}
+        >
           <span></span>
           <span></span>
           <span></span>

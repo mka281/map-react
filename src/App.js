@@ -90,7 +90,6 @@ class App extends Component {
         const size = "250x200"
         const photoURL = bestPhoto.prefix + size + bestPhoto.suffix;
         const info = { photoURL, description, rating, ratingColor, isOpen, url, fsqUrl }
-        console.log(url)
         return info
       })
       .then(info => {
@@ -137,13 +136,26 @@ class App extends Component {
   clearQuery = () => {
     this.setState({ query: "" })
   }
-
+  toggleInfoDiv = () => {
+    const infoDiv = document.getElementById('info')
+    const mapDiv = document.getElementById('map')
+    if (infoDiv.style.display === "none") {
+        infoDiv.style.display = "block"
+        mapDiv.style.width = "73%"
+    } else {
+        infoDiv.style.display = "none"
+        mapDiv.style.width = "100%"
+    }
+  }
   render() {
     const { map, zoom, center, markers, query } = this.state
-    const { hideListings, showListings, showOnly, updateQuery, clearQuery } = this
+    const { hideListings, showListings, showOnly, updateQuery,
+            clearQuery, toggleInfoDiv } = this
     return (
       <div id='app'>
-        <Nav />
+        <Nav
+          toggleInfoDiv={toggleInfoDiv}
+        />
         <Info
           map={map}
           zoom={zoom}
