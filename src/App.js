@@ -86,14 +86,14 @@ class App extends Component {
       .then(venue => {
         console.log(venue)
         const { bestPhoto, description, rating, ratingColor,
-                isOpen, officialUrl, fsqUrl } = venue
+                isOpen, url, fsqUrl } = venue
         const size = "250x200"
         const photoURL = bestPhoto.prefix + size + bestPhoto.suffix;
-        const info = { photoURL, description, rating, ratingColor, isOpen, officialUrl, fsqUrl }
+        const info = { photoURL, description, rating, ratingColor, isOpen, url, fsqUrl }
+        console.log(url)
         return info
       })
       .then(info => {
-        console.log(info.ratingColor)
         infowindow.setContent(
           `<div>
             <h3>${title}</h3>
@@ -101,7 +101,7 @@ class App extends Component {
             <img src="${info.photoURL}"/>
             <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
             <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
-            <a href="${info.officialUrl}">Official Website</a>
+            <a href="${info.url}">${info.url ? "Official Website" : ""}</a>
             <a href="${info.fsqUrl}">View on Foursquare</a>
           </div>`
         )
