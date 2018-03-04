@@ -8,35 +8,34 @@ class App extends Component {
   state = {
     map: {},
     // Infos required to create a map
-    zoom: 12,
-    center: {lat: 40.7347062, lng: -73.9895759},
-    // Create locations manually instead of a database. Copied from:
-    // https://github.com/udacity/ud864/blob/master/Project_Code_3_WindowShoppingPart1.html
+    zoom: 10,
+    center: {lat: 41.0082, lng: 28.9784},
+    // Create locations manually instead of a database.
     locations: [
       {
-        title: 'Park Ave Penthouse',
-        location: {lat: 40.7713024, lng: -73.9632393},
-        foursquareId: "4b83992ef964a520dd0a31e3"
+        title: 'Istanbul Archeology Museums',
+        location: {lat: 41.01131911544835, lng: 28.9807878655699},
+        foursquareId: "4c0b5171009a0f47f7feeabf"
       },{
-        title: 'Chelsea Loft',
-        location: {lat: 40.7444883, lng: -73.9949465},
+        title: 'Hagia Sophia',
+        location: {lat: 41.008203152757076, lng: 28.97866174266371},
+        foursquareId: "4bc8088f15a7ef3b6b857ada"
+      },{
+        title: 'Blue Mosque',
+        location: {lat: 41.00592108611381, lng: 28.976922165776163},
+        foursquareId: "4b753a2af964a520d4012ee3"
+      },{
+        title: 'Topkapı Palace',
+        location: {lat: 41.010589915507516, lng: 28.98174859064375},
         foursquareId: "4b824a4bf964a5202dcf30e3"
       },{
-        title: 'Union Square Open Floor Plan',
-        location: {lat: 40.7347062, lng: -73.9895759},
-        foursquareId: "4bc8088f15a7ef3b6b857ada"
+        title: 'Prince\'s Islands',
+        location: {lat: 40.88003522603099, lng: 29.07909393310547},
+        foursquareId: "4e05b8f71838eb15aef5d436"
       },{
-        title: 'East Village Hip Studio',
-        location: {lat: 40.7281777, lng: -73.984377},
-        foursquareId: "4bc8088f15a7ef3b6b857ada"
-      },{
-        title: 'TriBeCa Artsy Bachelor Pad',
-        location: {lat: 40.7195264, lng: -74.0089934},
-        foursquareId: "4bc8088f15a7ef3b6b857ada"
-      },{
-        title: 'Chinatown Homey Space',
-        location: {lat: 40.7180628, lng: -73.9961237},
-        foursquareId: "52303b6111d23260984e7830"
+        title: 'Pierre Loti',
+        location: {lat: 41.05353347903194, lng: 28.933392265414366},
+        foursquareId: "4b83be45f964a520e00e31e3"
       }
     ],
     markers: [],
