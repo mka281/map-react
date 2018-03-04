@@ -71,9 +71,10 @@ class App extends Component {
       let infowindow = new google.maps.InfoWindow({
         maxWidth: 250
       });
-      // Open infowindow when marker is clicked
+      // Open infowindow when marker and set marker the center of the map
       marker.addListener('click', function() {
         infowindow.open(map, marker);
+        map.setCenter(position)
       });
 
       // FOURSQUARE API REQUEST
@@ -86,10 +87,8 @@ class App extends Component {
         console.log(venue)
         const { bestPhoto, description, rating, ratingColor,
                 isOpen, officialUrl, fsqUrl } = venue
-        const prefix = bestPhoto.prefix
-        const suffix = bestPhoto.suffix
         const size = "250x200"
-        const photoURL = prefix + size + suffix;
+        const photoURL = bestPhoto.prefix + size + bestPhoto.suffix;
         const info = { photoURL, description, rating, ratingColor, isOpen, officialUrl, fsqUrl }
         return info
       })
@@ -108,7 +107,6 @@ class App extends Component {
         )
       })
       .catch(err => { console.log(err) })
-
     })
   }
 
