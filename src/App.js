@@ -83,7 +83,6 @@ class App extends Component {
       .then(res => { return res.json() })
       .then(data => { return data.response.venue })
       .then(venue => {
-        console.log(venue)
         const { bestPhoto, description, rating, ratingColor,
                 isOpen, url, fsqUrl } = venue
         const size = "250x200"

@@ -27,6 +27,7 @@ html, body {
   padding: 13px;
   color: #FFFFFF;
   border: 0;
+  cursor: pointer;
 }
 #hide-listings, #show-listings:focus {
   outline:0;
@@ -42,17 +43,19 @@ html, body {
   font-size: 1.2em;
 }
 #list-item {
+  font-family: 'Josefin Sans', sans-serif;
   padding: 14px 29px;
   color: #AAAAAA;
 }
 #list-item:hover {
+  font-family: 'Titillium Web', sans-serif;
   color: white;
   cursor: pointer;
 }
 
 /* Search */
 #search-container {
-  width: 99%;
+  width: 99.5%;
   border: 1px solid #1C262F;
   display: flex;
   flex-direction: row;
@@ -116,5 +119,6 @@ nav {
 @media screen and (max-width: 500px) {
   #info {
     width: 70%;
+    display: none;
   }
 }
