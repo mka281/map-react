@@ -123,10 +123,12 @@ class App extends Component {
     const { markers, map } = this.state
     // Remove markers except the clicked one
     markers.filter((marker, index) => index !== e).map(marker=>
-      marker.setMap(null)
+      marker.setMap(null),
     )
     // Get back the marker of the clicked one if it is removed before
     markers[e].setMap(map)
+    // Make marker the map center
+    map.setCenter(markers[e].position)
   }
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
