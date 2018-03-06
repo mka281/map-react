@@ -135,6 +135,7 @@ class App extends Component {
     )
     // Get back the marker of the clicked one if it is removed before
     markers[e].setMap(map)
+    markers[e].setAnimation(window.google.maps.Animation.DROP)
     // Make marker the map center
     map.setCenter(markers[e].position)
   }
