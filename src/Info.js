@@ -38,8 +38,8 @@ class Info extends Component {
           />
         </div>
         {showingLocations.length !== markers.length &&
-          <div>
-            <span>Now showing {showingLocations.length} of {markers.length} total</span>
+          <div id="search-result-info">
+            <span>Showing {showingLocations.length} of {markers.length} total</span>
             <button onClick={clearQuery}>
               Show all
             </button>

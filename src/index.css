@@ -74,6 +74,19 @@ html, body {
 #search-icon, #search {
   padding: 10px;
 }
+#search-result-info {
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.1em;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-around;
+}
+#search-result-info button {
+  background-color: #02B3E4;
+  border: none;
+  border-radius: 7px;
+}
 
 /* Nav */
 nav {
