@@ -49,7 +49,6 @@ html, body {
   color: #AAAAAA;
 }
 #list-item:hover {
-  font-family: 'Titillium Web', sans-serif;
   color: white;
   cursor: pointer;
 }
