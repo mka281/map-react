@@ -21,9 +21,17 @@ class Info extends Component {
       // If there is no match make showLocations include all markers
       showingLocations = markers
     }
-    showingLocations.sort(sortBy('name'))
 
-
+    // Function to compare elements of showListings by title
+    const compare = (a, b) => {
+      if (a.title < b.title)
+        return -1;
+      if (a.title > b.title)
+        return 1;
+      return 0;
+    }
+    // Sort list items by title
+    showingLocations.sort(compare);
     return (
       <div id='info'>
         <button onClick={showListings} id="show-listings" type="button">Show All</button>
