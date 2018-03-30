@@ -78,43 +78,55 @@ class App extends Component {
       let infowindow = new google.maps.InfoWindow({
         maxWidth: 250
       });
-      // Open infowindow when marker and set marker the center of the map
-      marker.addListener('click', function() {
-        // Close other infowindows
-        console.log(markers)
-        infowindow.open(map, marker);
 
+      marker.addListener('click', () => {
+        // Toggle infowindow when marker is clicked
+        if (!marker.open) {
+          infowindow.open(map, marker);
+          marker.open = true;
+        } else {
+          infowindow.close();
+          marker.open = false;
+        }
+
+        // Set marker the center of the map
         map.setCenter(position)
+      });
+
+      // Close infowindows when anywhere in the map is clicked
+      google.maps.event.addListener(map, 'click', () => {
+        infowindow.close();
+        marker.open = false;
       });
 
       // FOURSQUARE API REQUEST
       const placeId = item.foursquareId
       const fsqApiUrl = `https://api.foursquare.com/v2/venues/${placeId}?&oauth_token=FEBDSPSSOAXMNNWDMD1ZUCSYEDBYLRWQ31APQF11OB2OB1UN&v=20180303`
       fetch(fsqApiUrl)
-      .then(res => { return res.json() })
-      .then(data => { return data.response.venue })
-      .then(venue => {
-        const { bestPhoto, description, rating, ratingColor,
-                isOpen, url, fsqUrl } = venue
-        const size = "250x200"
-        const photoURL = bestPhoto.prefix + size + bestPhoto.suffix;
-        const info = { photoURL, description, rating, ratingColor, isOpen, url, fsqUrl }
-        return info
-      })
-      .then(info => {
-        infowindow.setContent(
-          `<div>
-            <h3 tabIndex="0">${title}</h3>
-            <p>${info.description}</p>
-            <img alt="${title} photo" src="${info.photoURL}"/>
-            <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
-            <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
-            <a href="${info.url}">${info.url ? "Official Website" : ""}</a>
-            <a href="${info.fsqUrl}">View on Foursquare</a>
-          </div>`
-        )
-      })
-      .catch(err => { console.log(err) })
+        .then(res => { return res.json() })
+        .then(data => { return data.response.venue })
+        .then(venue => {
+          const { bestPhoto, description, rating, ratingColor,
+                  isOpen, url, fsqUrl } = venue
+          const size = "250x200"
+          const photoURL = bestPhoto.prefix + size + bestPhoto.suffix;
+          const info = { photoURL, description, rating, ratingColor, isOpen, url, fsqUrl }
+          return info
+        })
+        .then(info => {
+          infowindow.setContent(
+            `<div>
+              <h3 tabIndex="0">${title}</h3>
+              <p>${info.description}</p>
+              <img alt="${title} photo" src="${info.photoURL}"/>
+              <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
+              <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
+              <a href="${info.url}">${info.url ? "Official Website" : ""}</a>
+              <a href="${info.fsqUrl}">View on Foursquare</a>
+            </div>`
+          )
+        })
+        .catch(err => { console.log(err) })
     })
   }
 
