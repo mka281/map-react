@@ -6,6 +6,9 @@ class Map extends Component {
     return (
       <nav>
         <div id="nav-icon"
+             tabIndex="1"
+             role="button"
+             aria-label="toggle menu"
           onClick={toggleInfoDiv}
         >
           <span></span>

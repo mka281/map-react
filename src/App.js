@@ -80,7 +80,10 @@ class App extends Component {
       });
       // Open infowindow when marker and set marker the center of the map
       marker.addListener('click', function() {
+        // Close other infowindows
+        console.log(markers)
         infowindow.open(map, marker);
+
         map.setCenter(position)
       });
 
@@ -101,9 +104,9 @@ class App extends Component {
       .then(info => {
         infowindow.setContent(
           `<div>
-            <h3>${title}</h3>
+            <h3 tabIndex="0">${title}</h3>
             <p>${info.description}</p>
-            <img src="${info.photoURL}"/>
+            <img alt="${title} photo" src="${info.photoURL}"/>
             <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
             <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
             <a href="${info.url}">${info.url ? "Official Website" : ""}</a>

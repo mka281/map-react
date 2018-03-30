@@ -33,14 +33,14 @@ class Info extends Component {
     // Sort list items by title
     showingLocations.sort(compare);
     return (
-      <div id='info'>
-        <button onClick={showListings} id="show-listings" type="button">Show All</button>
-        <button onClick={hideListings} id="hide-listings" type="button">Hide All</button>
+      <div id='info' role='complementary'>
+        <button onClick={showListings} id="show-listings" type="button">Show Markers</button>
+        <button onClick={hideListings} id="hide-listings" type="button">Hide Markers</button>
         <div id="search-container">
           <span id="search-icon">
             <i className="fa fa-search"></i>
           </span>
-          <input id="search" type='text' placeholder='Search'
+          <input id="search" type='text' placeholder='Filter by name'
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
           />
@@ -49,16 +49,16 @@ class Info extends Component {
           <div id="search-result-info">
             <span>Showing {showingLocations.length} of {markers.length} total</span>
             <button onClick={clearQuery}>
-              Show all
+              Clear Filter
             </button>
           </div>
         }
-        <div id='list'>{showingLocations.map((marker, index)=>
-          <div id='list-item' key={index} onClick={() => showOnly(index)}>
+        <ul id='list'>{showingLocations.map((marker, index)=>
+          <li id='list-item' key={index} onClick={() => showOnly(index)} tabIndex="0">
             {marker.title}
-          </div>
+          </li>
         )}
-        </div>
+        </ul>
       </div>
     )
   }
