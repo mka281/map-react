@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Nav from './Nav'
-import ListView from './ListView'
-import Map from './Map'
-import './App.css'
+import Nav from './components/Nav'
+import ListView from './components/ListView'
+import Map from './components/Map'
 
 class App extends Component {
   state = {
