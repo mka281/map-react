@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
-class Info extends Component {
+class ListView extends Component {
 
   render() {
     const { showListings, hideListings, updateQuery,
@@ -33,7 +33,7 @@ class Info extends Component {
     // Sort list items by title
     showingLocations.sort(compare);
     return (
-      <div id='info' role='complementary'>
+      <div id='list-view' role='complementary'>
         <button onClick={showListings} id="show-listings" type="button">Show Markers</button>
         <button onClick={hideListings} id="hide-listings" type="button">Hide Markers</button>
         <div id="search-container">
@@ -64,4 +64,4 @@ class Info extends Component {
   }
 }
 
-export default Info
+export default ListView

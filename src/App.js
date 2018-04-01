@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Nav from './Nav'
-import Info from './Info'
+import ListView from './ListView'
 import Map from './Map'
 import './App.css'
 
@@ -160,29 +160,29 @@ class App extends Component {
   clearQuery = () => {
     this.setState({ query: "" })
   }
-  toggleInfoDiv = () => {
-    const infoDiv = document.getElementById('info')
+  toggleListView = () => {
+    const listDiv = document.getElementById('list-view')
     const mapDiv = document.getElementById('map')
-    if (infoDiv.style.display === "none") {
-        infoDiv.style.display = "block"
+    if (listDiv.style.display === "none") {
+        listDiv.style.display = "block"
         if (window.screen.width > 800) {
           mapDiv.style.width = "73%"
         }
     } else {
-        infoDiv.style.display = "none"
+        listDiv.style.display = "none"
         mapDiv.style.width = "100%"
     }
   }
   render() {
     const { map, zoom, center, markers, query } = this.state
     const { hideListings, showListings, showOnly, updateQuery,
-            clearQuery, toggleInfoDiv } = this
+            clearQuery, toggleListView } = this
     return (
       <div id='app'>
         <Nav
-          toggleInfoDiv={toggleInfoDiv}
+          toggleListView={toggleListView}
         />
-        <Info
+        <ListView
           map={map}
           zoom={zoom}
           center={center}

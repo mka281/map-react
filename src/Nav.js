@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 
 class Map extends Component {
   render() {
-    const { toggleInfoDiv } = this.props
+    const { toggleListView } = this.props
     return (
       <nav>
         <div id="nav-icon"
              tabIndex="1"
              role="button"
              aria-label="toggle menu"
-          onClick={toggleInfoDiv}
+          onClick={toggleListView}
         >
           <span></span>
           <span></span>

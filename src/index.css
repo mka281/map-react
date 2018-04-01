@@ -18,7 +18,7 @@ html, body {
 }
 
 /* Info Component */
-#info {
+#list-view {
   width: 27%;
   height: calc(100% - 50px);
   background-color: #2E3D49;
