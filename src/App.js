@@ -115,14 +115,14 @@ class App extends Component {
         })
         .then(info => {
           infowindow.setContent(
-            `<div>
+            `<div style="text-align: center">
               <h3 tabIndex="0">${title}</h3>
-              <p>${info.description}</p>
+              <p>${info.description ? info.description : ""}</p>
               <img alt="${title} photo" src="${info.photoURL}"/>
-              <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span>
-              <span>${info.isOpen ? "Open Now" : "Closed Now"}</span>
-              <a href="${info.url}">${info.url ? "Official Website" : ""}</a>
-              <a href="${info.fsqUrl}">View on Foursquare</a>
+              <span style="color:#${info.ratingColor}; font-weight:bold">${info.rating}</span><br>
+              <span>${info.isOpen ? "Open Now" : "Closed Now"}</span><br>
+              <a href="${info.fsqUrl}">View on Foursquare</a><br>
+              <a href="${info.url}">${info.url ? "Visit Official Website" : ""}</a>
             </div>`
           )
         })
