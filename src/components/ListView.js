@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+import React, { Component } from "react"
+import escapeRegExp from "escape-string-regexp"
 
 class ListView extends Component {
 
@@ -12,9 +11,9 @@ class ListView extends Component {
     let showingLocations;
     if (query) {
       // Store locations matched with query in showingLocations
-      const match = new RegExp(escapeRegExp(query), 'i')
+      const match = new RegExp(escapeRegExp(query), "i")
       showingLocations = markers.filter(marker => match.test(marker.title))
-      // Show only checked locations' markers on map
+      // Show only checked locations" markers on map
       markers.map(marker => marker.setMap(null))
       showingLocations.map(location => location.setMap(map))
     } else {
@@ -32,15 +31,16 @@ class ListView extends Component {
     }
     // Sort list items by title
     showingLocations.sort(compare);
+
     return (
-      <div id='list-view' role='complementary'>
+      <div id="list-view" role="complementary">
         <button onClick={showListings} id="show-listings" type="button">Show Markers</button>
         <button onClick={hideListings} id="hide-listings" type="button">Hide Markers</button>
         <div id="search-container">
           <span id="search-icon">
             <i className="fa fa-search"></i>
           </span>
-          <input id="search" type='text' placeholder='Filter by name'
+          <input id="search" type="text" placeholder="Filter by name"
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
           />
@@ -53,8 +53,8 @@ class ListView extends Component {
             </button>
           </div>
         }
-        <ul id='list'>{showingLocations.map((marker, index)=>
-          <li id='list-item' key={index} onClick={() => showOnly(index)} tabIndex="0">
+        <ul id="list">{showingLocations.map((marker, index)=>
+          <li id="list-item" key={index} onClick={() => showOnly(index)} tabIndex="0">
             {marker.title}
           </li>
         )}

@@ -3,26 +3,67 @@ html, body {
   height: 100%;
   margin: 0;
 }
+
 #root {
   width: 100%;
   height: 100%;
 }
+
 #app {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
 }
+
+/* Nav */
+nav {
+  width: 100%;
+  height: 50px;
+  background-color: #1C262F;
+}
+
+#nav-icon {
+  width: 28px;
+  height: 20px;
+  margin: 15px;
+  transform: rotate(0deg);
+  cursor: pointer;
+}
+
+#nav-icon span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #02B3E4;
+  border-radius: 2px;
+}
+
+#nav-icon span:nth-child(1) {
+  top: 0px;
+}
+
+#nav-icon span:nth-child(2) {
+  top: 8px;
+}
+
+#nav-icon span:nth-child(3) {
+  top: 16px;
+}
+
+/* Map */
 #map {
   width: 73%;
   height: calc(100% - 50px);
 }
 
-/* Info Component */
+/* ListView Component */
 #list-view {
   width: 27%;
   height: calc(100% - 50px);
   background-color: #2E3D49;
 }
+
 #hide-listings, #show-listings {
   width: 50%;
   padding: 13px;
@@ -30,24 +71,30 @@ html, body {
   border: 0;
   cursor: pointer;
 }
+
 #hide-listings, #show-listings:focus {
   outline:0;
 }
+
 #hide-listings {
   background-color: #d34a4a;
 }
+
 #show-listings {
   background-color: #22c93e;
 }
+
 #list {
   padding: 16px 0;
   font-size: 1.2em;
 }
+
 #list-item {
   font-family: 'Josefin Sans', sans-serif;
   padding: 14px 29px;
   color: #AAAAAA;
 }
+
 #list-item:hover {
   color: white;
   cursor: pointer;
@@ -60,19 +107,24 @@ html, body {
   display: flex;
   flex-direction: row;
 }
+
 #search-icon {
   background: #2E3D49;
 }
+
 .fa-search {
   color: #02B3E4;
 }
+
 #search {
   border: none;
   flex: 1;
 }
+
 #search-icon, #search {
   padding: 10px;
 }
+
 #search-result-info {
   color: #FFFFFF;
   text-align: center;
@@ -81,45 +133,16 @@ html, body {
   display: flex;
   justify-content: space-around;
 }
+
 #search-result-info button {
   background-color: #02B3E4;
   border: none;
   border-radius: 7px;
 }
 
-/* Nav */
-nav {
-  width: 100%;
-  height: 50px;
-  background-color: #1C262F;
-}
-#nav-icon {
-  width: 28px;
-  height: 20px;
-  margin: 15px;
-  transform: rotate(0deg);
-  cursor: pointer;
-}
-#nav-icon span {
-  display: block;
-  position: absolute;
-  height: 4px;
-  width: 100%;
-  background: #02B3E4;
-  border-radius: 2px;
-}
-#nav-icon span:nth-child(1) {
-  top: 0px;
-}
-#nav-icon span:nth-child(2) {
-  top: 8px;
-}
-#nav-icon span:nth-child(3) {
-  top: 16px;
-}
-
+/* Media queries */
 @media screen and (max-width: 800px) {
-  #info {
+  #list-view {
     width: 40%;
     position: absolute;
     z-index: 1;
@@ -129,8 +152,9 @@ nav {
     width: 100%;
   }
 }
+
 @media screen and (max-width: 500px) {
-  #info {
+  #list-view {
     width: 70%;
     display: none;
   }
